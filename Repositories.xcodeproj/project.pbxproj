@@ -8,20 +8,42 @@
 
 /* Begin PBXBuildFile section */
 		925023D820D19B1B00106771 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023D720D19B1B00106771 /* AppDelegate.swift */; };
-		925023DA20D19B1B00106771 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023D920D19B1B00106771 /* ViewController.swift */; };
 		925023DD20D19B1B00106771 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925023DB20D19B1B00106771 /* Main.storyboard */; };
 		925023DF20D19B1C00106771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925023DE20D19B1C00106771 /* Assets.xcassets */; };
 		925023E220D19B1C00106771 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925023E020D19B1C00106771 /* LaunchScreen.storyboard */; };
+		925023ED20D19CF700106771 /* RepositoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023EC20D19CF700106771 /* RepositoriesTableViewController.swift */; };
+		925023EF20D19D3200106771 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023EE20D19D3200106771 /* WebViewController.swift */; };
+		925023F420D19E1200106771 /* RepositoriesSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023F320D19E1200106771 /* RepositoriesSearchService.swift */; };
+		925023F620D19E2C00106771 /* RepositoriesSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023F520D19E2C00106771 /* RepositoriesSearchProvider.swift */; };
+		925023F820D19E4300106771 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023F720D19E4300106771 /* Repository.swift */; };
+		925023FB20D19E7000106771 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023FA20D19E7000106771 /* Cancelable.swift */; };
+		925023FD20D19E9700106771 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023FC20D19E9700106771 /* LocalStorage.swift */; };
+		9250240020D19ECA00106771 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925023FF20D19ECA00106771 /* Extensions.swift */; };
+		9250240220D1A65E00106771 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250240120D1A65E00106771 /* Reusable.swift */; };
+		9250240420D1A66600106771 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250240320D1A66600106771 /* Configurable.swift */; };
+		9250240620D1A6CA00106771 /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250240520D1A6CA00106771 /* RepositoryTableViewCell.swift */; };
+		9250240820D1B5D400106771 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9250240720D1B5D400106771 /* ResultsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		925023D420D19B1B00106771 /* Repositories.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Repositories.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		925023D720D19B1B00106771 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		925023D920D19B1B00106771 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		925023DC20D19B1B00106771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		925023DE20D19B1C00106771 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		925023E120D19B1C00106771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		925023E320D19B1C00106771 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		925023EC20D19CF700106771 /* RepositoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesTableViewController.swift; sourceTree = "<group>"; };
+		925023EE20D19D3200106771 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		925023F320D19E1200106771 /* RepositoriesSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesSearchService.swift; sourceTree = "<group>"; };
+		925023F520D19E2C00106771 /* RepositoriesSearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesSearchProvider.swift; sourceTree = "<group>"; };
+		925023F720D19E4300106771 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		925023FA20D19E7000106771 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
+		925023FC20D19E9700106771 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		925023FF20D19ECA00106771 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9250240120D1A65E00106771 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		9250240320D1A66600106771 /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		9250240520D1A6CA00106771 /* RepositoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewCell.swift; sourceTree = "<group>"; };
+		9250240720D1B5D400106771 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +77,88 @@
 			isa = PBXGroup;
 			children = (
 				925023D720D19B1B00106771 /* AppDelegate.swift */,
-				925023D920D19B1B00106771 /* ViewController.swift */,
-				925023DB20D19B1B00106771 /* Main.storyboard */,
-				925023DE20D19B1C00106771 /* Assets.xcassets */,
-				925023E020D19B1C00106771 /* LaunchScreen.storyboard */,
-				925023E320D19B1C00106771 /* Info.plist */,
+				925023F120D19DA800106771 /* Models */,
+				925023F220D19DAD00106771 /* Views */,
+				925023EB20D19CD800106771 /* Controllers */,
+				925023F020D19D7500106771 /* Services */,
+				925023F920D19E5A00106771 /* Protocols */,
+				925023FE20D19EAA00106771 /* Extensions */,
+				925023EA20D19B4D00106771 /* Storyboards */,
+				925023E920D19B3200106771 /* SupportingFiles */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		925023E920D19B3200106771 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				925023DE20D19B1C00106771 /* Assets.xcassets */,
+				925023E320D19B1C00106771 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		925023EA20D19B4D00106771 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				925023DB20D19B1B00106771 /* Main.storyboard */,
+				925023E020D19B1C00106771 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		925023EB20D19CD800106771 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				925023EE20D19D3200106771 /* WebViewController.swift */,
+				9250240720D1B5D400106771 /* ResultsTableViewController.swift */,
+				925023EC20D19CF700106771 /* RepositoriesTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		925023F020D19D7500106771 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				925023F320D19E1200106771 /* RepositoriesSearchService.swift */,
+				925023F520D19E2C00106771 /* RepositoriesSearchProvider.swift */,
+				925023FC20D19E9700106771 /* LocalStorage.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		925023F120D19DA800106771 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				925023F720D19E4300106771 /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		925023F220D19DAD00106771 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9250240520D1A6CA00106771 /* RepositoryTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		925023F920D19E5A00106771 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9250240120D1A65E00106771 /* Reusable.swift */,
+				9250240320D1A66600106771 /* Configurable.swift */,
+				925023FA20D19E7000106771 /* Cancelable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		925023FE20D19EAA00106771 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				925023FF20D19ECA00106771 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +232,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				925023DA20D19B1B00106771 /* ViewController.swift in Sources */,
 				925023D820D19B1B00106771 /* AppDelegate.swift in Sources */,
+				9250240020D19ECA00106771 /* Extensions.swift in Sources */,
+				925023F420D19E1200106771 /* RepositoriesSearchService.swift in Sources */,
+				9250240620D1A6CA00106771 /* RepositoryTableViewCell.swift in Sources */,
+				925023EF20D19D3200106771 /* WebViewController.swift in Sources */,
+				9250240220D1A65E00106771 /* Reusable.swift in Sources */,
+				9250240420D1A66600106771 /* Configurable.swift in Sources */,
+				9250240820D1B5D400106771 /* ResultsTableViewController.swift in Sources */,
+				925023ED20D19CF700106771 /* RepositoriesTableViewController.swift in Sources */,
+				925023F620D19E2C00106771 /* RepositoriesSearchProvider.swift in Sources */,
+				925023FD20D19E9700106771 /* LocalStorage.swift in Sources */,
+				925023F820D19E4300106771 /* Repository.swift in Sources */,
+				925023FB20D19E7000106771 /* Cancelable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLM52D56AC;
-				INFOPLIST_FILE = Repositories/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Repositories/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -300,7 +408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DLM52D56AC;
-				INFOPLIST_FILE = Repositories/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Repositories/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
