@@ -13,7 +13,6 @@ struct Repository: Codable, Hashable {
     struct Owner: Codable, Hashable {
         
         let id: Int
-        let login: String
         let avatarUrl: String
         
         var hashValue: Int {
@@ -22,13 +21,11 @@ struct Repository: Codable, Hashable {
     }
     
     let id: Int
-    let url: String
     let name: String
     let owner: Owner
-    let score: Double
-    let stargazersCount: Int
-    let description: String?
     let htmlUrl: String
+    let description: String?
+    let stargazersCount: Int
     
     var hashValue: Int {
         return self.id.hashValue

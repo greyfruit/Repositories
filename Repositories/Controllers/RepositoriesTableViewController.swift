@@ -8,12 +8,14 @@
 
 import UIKit
 
+typealias RepositoriesSearchResultsController = RepositoriesDisplayer & UIViewController
+
+protocol RepositoriesDisplayer {
+    func display(repositories: [Repository])
+    func invalidate()
+}
+
 class RepositoriesTableViewController: UITableViewController {
-    
-    let searchService: RepositoriesSearchServiceProtocol = RepositoriesSearchService(
-        searchProvider: RepositoriesSearchProvider(baseURL: URL(string: "https://api.github.com/")!),
-        storage: LocalStorage()
-    )
     
     var repositories: [Repository] = [] {
         didSet {
@@ -23,39 +25,18 @@ class RepositoriesTableViewController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        self.definesPresentationContext = true
-//        self.navigationItem.searchController = {
-//
-//            let searchController = UISearchController(searchResultsController: nil)
-//            searchController.hidesNavigationBarDuringPresentation = false
-//            searchController.dimsBackgroundDuringPresentation = false
-//            searchController.searchBar.showsCancelButton = false
-//            searchController.searchBar.delegate = self
-//            searchController.searchResultsUpdater = self
-//            searchController.delegate = self
-//
-//            return searchController
-//        }()
-    }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//        DispatchQueue.main.async {
-//            self.navigationItem.searchController?.isActive = true
-//        }
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let webViewController = segue.destination as? WebViewController, let popoverPresentationController = webViewController.popoverPresentationController {
+        if let webViewController = segue.destination as? WebViewController, let repository = sender as? Repository {
+            
+            webViewController.urlPath = repository.htmlUrl
             webViewController.preferredContentSize = CGSize(width: self.view.bounds.width * 0.85, height: self.view.bounds.height * 0.75)
-            popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0.0, height: 0.0)
-            popoverPresentationController.sourceView = self.view
-            popoverPresentationController.delegate = self
+            
+            if let popoverPresentationController = webViewController.popoverPresentationController {
+                popoverPresentationController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0.0, height: 0.0)
+                popoverPresentationController.sourceView = self.view
+                popoverPresentationController.delegate = self
+            }
         }
     }
 }
@@ -67,25 +48,14 @@ extension RepositoriesTableViewController: UIPopoverPresentationControllerDelega
     }
 }
 
-extension RepositoriesTableViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+extension RepositoriesTableViewController: RepositoriesDisplayer {
     
-    func updateSearchResults(for searchController: UISearchController) {
-        
+    func display(repositories: [Repository]) {
+        self.repositories = repositories
     }
     
-    func presentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.becomeFirstResponder()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchService.cancel()
-        self.repositories.removeAll()
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchService.search(with: searchBar.text ?? "") { (repositories) in
-            self.repositories = repositories
-        }
+    func invalidate() {
+        self.repositories = []
     }
 }
 
@@ -102,7 +72,11 @@ extension RepositoriesTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "popoverSegue", sender: tableView.cellForRow(at: indexPath))
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        defer {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        self.performSegue(withIdentifier: "toWebViewController", sender: self.repositories[indexPath.row])
     }
 }

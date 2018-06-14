@@ -27,8 +27,8 @@ extension RepositoryTableViewCell: Configurable {
     
     func configure(with repository: Repository) {
         
-        self.nameLabel.text = repository.name
-        self.descriptionLabel.text = repository.description
+        self.nameLabel.text = repository.name.prefix(30).string
+        self.descriptionLabel.text = repository.description?.prefix(30).string
         
         DispatchQueue.global(qos: .background).async {
             if let imageURL = URL(string: repository.owner.avatarUrl), let imageData = try? Data(contentsOf: imageURL) {

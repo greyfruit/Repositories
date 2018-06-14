@@ -11,9 +11,27 @@ import WebKit
 
 class WebViewController: UIViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var webView: WKWebView! {
         didSet {
-            webView.load(URLRequest(url: URL(string: "https://github.com/pennersr/django-allauth")!))
+            webView.navigationDelegate = self
         }
+    }
+    
+    var urlPath: String?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let urlPath = self.urlPath, let url = URL(string: urlPath) {
+            self.webView.load(URLRequest(url: url))
+        }
+    }
+}
+
+extension WebViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        self.activityIndicator.stopAnimating()
     }
 }

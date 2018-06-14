@@ -1,5 +1,5 @@
 //
-//  ResultsTableViewController.swift
+//  SearchTableViewController.swift
 //  Repositories
 //
 //  Created by Vanya Petrukha on 13.06.2018.
@@ -8,19 +8,14 @@
 
 import UIKit
 
-class ResultsTableViewController: UITableViewController {
+class SearchTableViewController: UITableViewController {
 
-    let searchService: RepositoriesSearchServiceProtocol = RepositoriesSearchService(
-        searchProvider: RepositoriesSearchProvider(baseURL: URL(string: "https://api.github.com/")!),
-        storage: LocalStorage()
-    )
-        
-    var results: [String] {
+    var searchService: RepositoriesSearchServiceProtocol!
+    var searchResultsController: RepositoriesSearchResultsController!
+    
+    var cachedQueries: [String] {
         return self.searchService.cachedQueries()
     }
-    
-    let repositoriesTableViewController = UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: "RepositoriesTableViewController") as! RepositoriesTableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,40 +23,37 @@ class ResultsTableViewController: UITableViewController {
         self.definesPresentationContext = true
         self.navigationItem.searchController = {
             
-            let searchController = UISearchController(searchResultsController: self.repositoriesTableViewController)
+            let searchController = UISearchController(searchResultsController: self.searchResultsController)
             searchController.hidesNavigationBarDuringPresentation = false
-            searchController.dimsBackgroundDuringPresentation = false
-            searchController.searchBar.showsCancelButton = false
-            searchController.searchBar.delegate = self
+            searchController.dimsBackgroundDuringPresentation = true
             searchController.searchResultsUpdater = self
-            searchController.isActive = true
+            searchController.searchBar.delegate = self
             searchController.delegate = self
             
             return searchController
         }()
     }
+}
+
+private extension SearchTableViewController {
     
     func updateSearchResults(with searchBar: UISearchBar) {
         if let searchText = searchBar.text, !searchText.isEmpty {
             self.searchService.search(with: searchText) { (repositories) in
-                self.repositoriesTableViewController.repositories = repositories
+                self.searchResultsController.display(repositories: repositories)
             }
         } else {
-            self.repositoriesTableViewController.repositories.removeAll()
+            self.searchResultsController.invalidate()
         }
     }
     
     func invalidateSearchResults() {
         self.searchService.cancel()
-        self.repositoriesTableViewController.repositories.removeAll()
+        self.searchResultsController.invalidate()
     }
 }
 
-extension ResultsTableViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
-    
-    func presentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.becomeFirstResponder()
-    }
+extension SearchTableViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
         self.tableView.reloadData()
@@ -80,22 +72,26 @@ extension ResultsTableViewController: UISearchResultsUpdating, UISearchControlle
     }
 }
 
-extension ResultsTableViewController {
+extension SearchTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.results.count
+        return self.cachedQueries.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "resultCell", for: indexPath)
-        cell.textLabel?.text = self.results[indexPath.row]
-        return cell
+        return tableView
+            .dequeueReusableCell(withType: QueryTableViewCell.self, for: indexPath)
+            .configured(with: self.cachedQueries[indexPath.row])
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        defer {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
         if let searchController = self.navigationItem.searchController {
-            searchController.searchBar.text = self.results[indexPath.row]
+            searchController.searchBar.text = self.cachedQueries[indexPath.row]
             searchController.isActive = true
         }
     }

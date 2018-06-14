@@ -36,9 +36,8 @@ class RepositoriesSearchProvider: RepositoriesSearchProviderProtocol {
                 }
                 
                 if let responseModel = try? JSONDecoder.fromSnakeCase.decode(ResponseModel.self, from: data) {
+                    
                     completion(responseModel.items)
-                } else {
-                    completion([])
                 }
             }
         }

@@ -13,16 +13,22 @@ protocol Storage {
     func retrieve<T>(_ objectType: T.Type, for key: String) throws -> T where T: Codable
 }
 
+enum StorageError: Error {
+    case storeFailed(reason: String)
+    case retrieveFailed(reason: String)
+}
+
 class LocalStorage: Storage {
     
-    enum StorageError: Error {
-        case storeFailed(reason: String)
-        case retrieveFailed(reason: String)
+    let fileManager: FileManager
+    
+    init(fileManager: FileManager = .default) {
+        self.fileManager = fileManager
     }
     
     var directoryURL: URL {
         
-        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        guard let url = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             fatalError("Document directory unavailable")
         }
         
@@ -35,22 +41,22 @@ class LocalStorage: Storage {
         
         let data = try JSONEncoder.default.encode(object)
         
-        if FileManager.default.fileExists(atPath: storageURL.path) {
-            try FileManager.default.removeItem(at: storageURL)
+        if self.fileManager.fileExists(atPath: storageURL.path) {
+            try self.fileManager.removeItem(at: storageURL)
         }
         
-        FileManager.default.createFile(atPath: storageURL.path, contents: data, attributes: nil)
+        self.fileManager.createFile(atPath: storageURL.path, contents: data, attributes: nil)
     }
     
     func retrieve<T>(_ objectType: T.Type, for key: String) throws -> T where T: Codable {
         
         let storageURL = self.directoryURL.appendingPathComponent(key, isDirectory: false)
         
-        guard FileManager.default.fileExists(atPath: storageURL.path) else {
+        guard self.fileManager.fileExists(atPath: storageURL.path) else {
             throw StorageError.retrieveFailed(reason: "File not exist at \(storageURL.path)")
         }
         
-        if let data = FileManager.default.contents(atPath: storageURL.path) {
+        if let data = self.fileManager.contents(atPath: storageURL.path) {
             return try JSONDecoder.default.decode(objectType, from: data)
         } else {
             throw StorageError.retrieveFailed(reason: "Data corrupted at \(storageURL.path)")
